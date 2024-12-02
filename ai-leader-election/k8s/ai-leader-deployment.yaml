@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-leader-app
+  namespace: ai-leader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-leader
+  template:
+    metadata:
+      labels:
+        app: ai-leader
+    spec:
+      containers:
+        - name: ai-leader-app
+          image: nanthan26/ai-leader-app:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

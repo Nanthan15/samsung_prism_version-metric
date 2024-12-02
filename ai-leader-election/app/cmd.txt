@@ -1,0 +1,3 @@
+kubectl scale deployment ai-leader-app --replicas=3 -n ai-leader
+
+make scaled 

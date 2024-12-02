@@ -1,0 +1,6 @@
+pod_name,cpu_usage,memory_usage,network_latency,uptime
+test-pod-1,0,4,0,260
+test-pod-2,0,4,0,260
+test-pod-3,0,4,0,260
+test-pod-4,0,4,0,260
+test-pod-5,0,4,0,434

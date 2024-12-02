@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leader Election Status</title>
+</head>
+<body>
+    <h1>Leader Election</h1>
+    <div id="leader-status"></div>
+    <button onclick="getLeader()">Update Leader</button>
+
+    <script>
+        async function getLeader() {
+            const response = await fetch("/update_leader", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    node_metrics: [
+                        {cpu_usage: 20, memory_usage: 30, uptime: 99},
+                        {cpu_usage: 50, memory_usage: 10, uptime: 90}
+                    ]
+                })
+            });
+            const result = await response.json();
+            document.getElementById("leader-status").innerText = "Current Leaders: " + JSON.stringify(result.new_leaders);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: update-leader
+  namespace: ai-leader
+spec:
+  schedule: "*/5 * * * *"  # Every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: update-leader
+            image: nanthan26/update-leader:latest
+            command: ["python", "/app/app.py", "retrain_model.py", "collect_metrics.py"] 
+            volumeMounts:
+              - name: config-volume
+                mountPath: /app/config
+          restartPolicy: OnFailure
+          volumes:
+          - name: config-volume
+            configMap:
+              name: ai-leader-config
